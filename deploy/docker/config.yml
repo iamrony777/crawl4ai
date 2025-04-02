@@ -8,9 +8,9 @@ app:
   timeout_keep_alive: 300
 
 # Default LLM Configuration
-llm:
-  provider: "openai/gpt-4o-mini"
-  api_key_env: "OPENAI_API_KEY"
+# llm:
+#   provider: "openai/gpt-4o-mini"
+#   api_key_env: "OPENAI_API_KEY"
   # api_key: sk-...  # If you pass the API key directly then api_key_env will be ignored
 
 # Redis Configuration
@@ -34,11 +34,11 @@ rate_limiting:
   enabled: True
   default_limit: "1000/minute"
   trusted_proxies: []
-  storage_uri: "memory://"  # Use "redis://localhost:6379" for production
+  storage_uri: "redis://localhost:6379"  # Use "redis://localhost:6379" for production
 
 # Security Configuration
 security:
-  enabled: false 
+  enabled: true 
   jwt_enabled: false 
   https_redirect: false
   trusted_hosts: ["*"]
@@ -65,7 +65,7 @@ logging:
 # Observability Configuration
 observability:
   prometheus:
-    enabled: True
+    enabled: False
     endpoint: "/metrics"
   health_check:
     endpoint: "/health"

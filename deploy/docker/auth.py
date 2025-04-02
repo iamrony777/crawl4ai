@@ -41,6 +41,17 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)) 
     except Exception:
         raise HTTPException(status_code=401, detail="Invalid or expired token")
 
+def crawl4ai_token_auth(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    if credentials is None:
+        return None
+    token = credentials.credentials
+    if token != os.environ.get("CRAWL4AI_API_TOKEN"):
+        raise HTTPException(status_code=401, detail="Invalid or expired token")
+    
+    print(f"Crawl4AI token verified: {token}")
+    return token
+
+
 
 def get_token_dependency(config: Dict):
     """Return the token dependency if JWT is enabled, else a function that returns None."""
@@ -48,7 +59,7 @@ def get_token_dependency(config: Dict):
     if config.get("security", {}).get("jwt_enabled", False):
         return verify_token
     else:
-        return lambda: None
+        return crawl4ai_token_auth
 
 
 class TokenRequest(BaseModel):

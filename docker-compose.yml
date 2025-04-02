@@ -9,6 +9,8 @@ x-base-config: &base-config
     - CRAWL4AI_API_TOKEN=${CRAWL4AI_API_TOKEN:-}
     - OPENAI_API_KEY=${OPENAI_API_KEY:-}
     - CLAUDE_API_KEY=${CLAUDE_API_KEY:-}
+  env_file:
+    - .env
   volumes:
     - /dev/shm:/dev/shm
   deploy:

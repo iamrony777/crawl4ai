@@ -76,12 +76,12 @@ async def add_security_headers(request: Request, call_next):
     return response
 
 # Token endpoint (always available, but usage depends on config)
-@app.post("/token")
-async def get_token(request_data: TokenRequest):
-    if not verify_email_domain(request_data.email):
-        raise HTTPException(status_code=400, detail="Invalid email domain")
-    token = create_access_token({"sub": request_data.email})
-    return {"email": request_data.email, "access_token": token, "token_type": "bearer"}
+# @app.post("/token")
+# async def get_token(request_data: TokenRequest):
+#     if not verify_email_domain(request_data.email):
+#         raise HTTPException(status_code=400, detail="Invalid email domain")
+#     token = create_access_token({"sub": request_data.email})
+#     return {"email": request_data.email, "access_token": token, "token_type": "bearer"}
 
 # Endpoints with conditional auth
 @app.get("/md/{url:path}")
