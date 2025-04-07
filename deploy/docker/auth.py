@@ -43,12 +43,11 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)) 
 
 def crawl4ai_token_auth(credentials: HTTPAuthorizationCredentials = Depends(security)):
     if credentials is None:
-        return None
+        raise HTTPException(status_code=401, detail="USE CRAWL4AI_API_TOKEN")
     token = credentials.credentials
     if token != os.environ.get("CRAWL4AI_API_TOKEN"):
-        raise HTTPException(status_code=401, detail="Invalid or expired token")
+        raise HTTPException(status_code=401, detail="Invalid token")
     
-    print(f"Crawl4AI token verified: {token}")
     return token
 
 

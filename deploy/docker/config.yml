@@ -35,6 +35,7 @@ rate_limiting:
   default_limit: "1000/minute"
   trusted_proxies: []
   storage_uri: "redis://localhost:6379"  # Use "redis://localhost:6379" for production
+  # storage_uri: "memory://"
 
 # Security Configuration
 security:
